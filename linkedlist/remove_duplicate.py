@@ -1,9 +1,11 @@
 #Remove duplicates from unsorted linked list
 #Without using bufffer time complexity will be O(N)*2
+
 class Node:
     def __init__(self,data):
         self.item = data
         self.next = None
+
 class LinkedList:
     def __init__(self):
         self.startnode = None
@@ -46,8 +48,22 @@ class LinkedList:
                 prev = curr
                 curr = curr.next    
             n = n.next
+    def RemoveDuplicateWithBuffer(self):
+        ItemList = []
+        n    = self.startnode
+        prev = None
+        while n is not None:
+            if n.item in ItemList:
+                prev.next = n.next    
+                n = n.next
+            else:
+                ItemList.append(n.item)
+                prev = n
+                n = n.next
+        return
 
 newlist = LinkedList()
 newlist.TraverseList()
-newlist.RemoveDuplicate()
+#newlist.RemoveDuplicate()
+newlist.RemoveDuplicateWithBuffer()
 newlist.TraverseList()
