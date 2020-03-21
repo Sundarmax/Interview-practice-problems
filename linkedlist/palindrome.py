@@ -1,6 +1,5 @@
 # To check if a linked list is a palindrome. 
 # Load data into stack and compare it with linked list.
-# Reverse a sinly linked list 
 class Node:
     def __init__(self,data):
         self.item = data
