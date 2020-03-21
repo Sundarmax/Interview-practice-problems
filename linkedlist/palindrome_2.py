@@ -10,14 +10,11 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.startnode = None
-        self.insert_at_last("R")
+        self.insert_at_last("M")
         self.insert_at_last("A")
-        self.insert_at_last("C")
-        self.insert_at_last("E")
-        self.insert_at_last("C")
         self.insert_at_last("A")
-        self.insert_at_last("R")
-
+        self.insert_at_last("M")
+        
     def insert_at_last(self,data):
         if self.startnode is None:
             new_node = Node(data)
@@ -66,21 +63,31 @@ class LinkedList:
         slow = self.startnode
         fast = self.startnode
         # Odd case
+        middleNode = None #initialize
         while fast is not None and fast.next is not None:
             prev = slow
             slow = slow.next
             fast = fast.next.next
-        StartReversehead = slow.next
-        prev.next = None # cut off link 
-        middleNode = slow # save mid node .
-        newhead = self.ReverseLinkedlist(head = StartReversehead)
+        if fast is None: # Even case
+            StartReversehead = slow
+            prev.next = None # cut off link 
+            newhead = self.ReverseLinkedlist(head = StartReversehead)
+        else: # odd case
+            StartReversehead = slow.next
+            prev.next = None # cut off link 
+            middleNode = slow # save mid node .
+            newhead = self.ReverseLinkedlist(head = StartReversehead)
         self.TraverseList(startNode=newhead)
         self.TraverseList(startNode=self.startnode)
+        #compare first half & reversed half
         result = self.CompareList(head1=self.startnode,head2=newhead)
         # construct original list
         oldhead = self.ReverseLinkedlist(head = newhead)
-        prev.next = middleNode
-        middleNode.next = oldhead
+        if middleNode is not None:
+            prev.next = middleNode
+            middleNode.next = oldhead
+        else:
+            prev.next = oldhead
         self.TraverseList(startNode=self.startnode)
 
 newlist = LinkedList()
