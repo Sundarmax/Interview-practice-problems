@@ -1,3 +1,7 @@
+
+# Sort a stack using one temprory stack. 
+# Time complexity o(n)*2
+
 class stack:
 
     stack = []
